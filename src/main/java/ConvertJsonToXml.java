@@ -2,13 +2,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.XML;
 
+
 public class ConvertJsonToXml {
-    public static String convertJsonToXml(String jsonRawData){
-
+    public static byte[] convertJsonToXmlRawBytes(JSONObject jsonObject) {
+        String XMLHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n";
         try {
-            JSONObject fileDataJson = new JSONObject(jsonRawData);
-            return XML.toString(fileDataJson);
-
+            String xmlData = XMLHeader + XML.toString(jsonObject);
+            return xmlData.getBytes();
         } catch (JSONException err) {
             System.out.println("Error" + err.toString());
             throw err;

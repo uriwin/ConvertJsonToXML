@@ -4,7 +4,7 @@ public class XmlFormat implements IFormatObject {
     public String xmlData;
 
     public XmlFormat(String xmlData) {
-        this.setXmlData(xmlData);
+        this.xmlData = xmlData;
     }
 
     public void setXmlData(String xmlData) {

@@ -5,7 +5,7 @@ import org.json.JSONObject;
 public class JsonFormat implements IFormatObject {
     JSONObject jsonObject;
     public JsonFormat(JSONObject jsonObject){
-        this.setJsonObject(jsonObject);
+        this.jsonObject = jsonObject;
     }
 
     public void setJsonObject(JSONObject jsonObject) {

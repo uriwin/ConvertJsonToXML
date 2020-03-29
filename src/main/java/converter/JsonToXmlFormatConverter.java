@@ -16,7 +16,8 @@ public class JsonToXmlFormatConverter implements FormatConverter {
         XmlUtils xmlUtils = new XmlUtils();
         try {
             JSONObject jsonObject = new JSONObject(jsonFormat.getFormatDataAsString());
-            return new XmlFormat(xmlUtils.getXmlHeader() + XML.toString(jsonObject));
+            String xmlHeader = xmlUtils.getXmlHeader();
+            return new XmlFormat(xmlHeader + XML.toString(jsonObject));
         } catch (JSONException e) {
             throw new ConvertFormatXmlToJsonException("Error when converting json object to xml" + e.getMessage());
         }

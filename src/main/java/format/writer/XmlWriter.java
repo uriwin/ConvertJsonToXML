@@ -1,18 +1,24 @@
+package format.writer;
+
+import format.writer.FormatObjectWriter;
+import format.IFormatObject;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class XmlWriter {
+public class XmlWriter implements FormatObjectWriter {
     String outputFileName;
 
     public XmlWriter(String outputFileName) throws FileNotFoundException {
         this.outputFileName = outputFileName;
     }
 
-    public void writeXml(String xmlData) throws IOException {
+    @Override
+    public void writeFormat(IFormatObject xml) throws IOException {
         try (OutputStream outputStream = new FileOutputStream(this.outputFileName)) {
-            outputStream.write(xmlData.getBytes());
+            outputStream.write(xml.getFormatDataAsString().getBytes());
         }
     }
 }

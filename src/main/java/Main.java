@@ -1,21 +1,25 @@
+import converter.JsonToXmlFormatConverter;
 import exceptions.ConvertFormatXmlToJsonException;
 import exceptions.ReadGZIPFileException;
-import org.json.JSONObject;
+import format.FormatType;
+import format.IFormatObject;
+import format.reader.JsonFromGZIPFileReader;
+import format.writer.XmlWriter;
 
 import java.io.IOException;
 import java.util.Properties;
 
 public class Main {
     public static void main(String[] args) throws ReadGZIPFileException, ConvertFormatXmlToJsonException, IOException {
-        ReadPropertyFIle readConfigFIle = new ReadPropertyFIle();
-        ReadGZIP readGZIP = new ReadGZIP();
-        ConvertFormatJsonToXml convertJsonToXml = new ConvertFormatJsonToXml();
+        PropertyFIleReader readConfigFIle = new PropertyFIleReader();
+        JsonFromGZIPFileReader jsonFromGZIPFileReader = new JsonFromGZIPFileReader();
+        JsonToXmlFormatConverter convertJsonToXml = new JsonToXmlFormatConverter();
 
         Properties properties = readConfigFIle.ReadConfigFile();
-        JSONObject jsonObject = readGZIP.readGZIPToJsonObject(properties.getProperty("inputFileName"));
-        String xmlData = convertJsonToXml.convertFormatJsonToXml(jsonObject, properties.getProperty("XMLHeader"));
+        IFormatObject json = jsonFromGZIPFileReader.readFormatObjectFromFile(properties.getProperty("inputFileName"));
+        IFormatObject xml = convertJsonToXml.convertFormat(json, FormatType.XML);
         XmlWriter xmlWriter = new XmlWriter(properties.getProperty("outputFileName"));
-        xmlWriter.writeXml(xmlData);
+        xmlWriter.writeFormat(xml);
         System.out.println("Successfully Converted json to xml");
     }
 }

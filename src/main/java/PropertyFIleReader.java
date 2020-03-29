@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ReadPropertyFIle {
+public class PropertyFIleReader {
     public Properties ReadConfigFile() throws IOException {
         String propFileName = "config.properties";
         try (InputStream input = this.getClass().getClassLoader().getResourceAsStream(propFileName)) {
